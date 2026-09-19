@@ -109,46 +109,44 @@ class _HomeShell extends ConsumerWidget {
       ),
     ],
   ),
-  floatingActionButton: FloatingActionButton(
-    backgroundColor: Colors.orange[800],
-    child: const Icon(Icons.bolt, color: Colors.white),
-    onPressed: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const WarpActionPage()),
-      );
-    },
-  ),
-);
+        floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.orange[600],
+        child: const Icon(Icons.bolt, color: Colors.white),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const WarpActionPage(),
+            ),
+          );
+        },
+      ),
 
-    AnimatedVisibility.bottomNavigation(
-      visible: isMobile,
-      child: MediaQuery.removePadding(
-        removeTop: true,
-        removeBottom: false,
-        removeLeft: true,
-        removeRight: true,
-        context: context,
-        child: NavigationBarTheme(
-          data: _NavigationBarDefaultsM3(context),
-          child: NavigationBar(
-            destinations: [
-              for (final item in navigationItems)
-                NavigationDestination(
-                  icon: item.icon,
-                  label: item.label,
-                ),
-            ],
-            selectedIndex: state.currentIndex,
-            onDestinationSelected: (index) =>
-                _handleToPage(navigationItems[index].label, ref),
+      AnimatedVisibility.bottomNavigation(
+        visible: isMobile,
+        child: MediaQuery.removePadding(
+          removeTop: true,
+          removeBottom: false,
+          removeLeft: true,
+          removeRight: true,
+          context: context,
+          child: NavigationBarTheme(
+            data: NavigationBarThemeDefaults.of(context),
+            child: NavigationBar(
+              destinations: [
+                for (final item in navigationItems)
+                  NavigationDestination(
+                    icon: item.icon,
+                    label: item.label,
+                  ),
+              ],
+              selectedIndex: state.currentIndex,
+              onDestinationSelected: (index) =>
+                  _handlePageNavigationItems(index.label, ref),
+            ),
           ),
         ),
       ),
-    ),
-  ],
-),
-
       AnimatedVisibility.bottomNavigation(
         visible: isMobile,
         child: MediaQuery.removePadding(

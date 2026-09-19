@@ -212,19 +212,10 @@ class _HomeShell extends ConsumerWidget {
         ),
       ),
     ],
-  ),
-  floatingActionButton: FloatingActionButton(
-    backgroundColor: Colors.orange[800],
-    child: const Icon(Icons.bolt, color: Colors.white),
-    onPressed: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const WarpActionPage()),
-      );
-    },
-  ),
-);
-          AnimatedVisibility.bottomNavigation(
+                ),
+            ),
+          ),
+          bottomNavigationBar: AnimatedVisibility.bottomNavigation(
             visible: isMobile,
             child: MediaQuery.removePadding(
               removeTop: true,
@@ -233,29 +224,40 @@ class _HomeShell extends ConsumerWidget {
               removeRight: true,
               context: context,
               child: NavigationBarTheme(
-                data: _NavigationBarDefaultsM3(context),
+                data: NavigationBarThemeDefaults.of(context),
                 child: NavigationBar(
                   destinations: [
                     for (final item in navigationItems)
                       NavigationDestination(
                         icon: item.icon,
-                        label: item.label.label,
+                        label: item.label,
                       ),
                   ],
-                  onDestinationSelected: (index) {
-                    _handleToPage(navigationItems[index].label, ref);
-                  },
                   selectedIndex: state.currentIndex,
+                  onDestinationSelected: (index) =>
+                      _handlePageNavigationItems(index.label, ref),
                 ),
               ),
             ),
           ),
-        ],
-      ),
-    );
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: Colors.orange[600],
+            child: const Icon(Icons.bolt, color: Colors.white),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const WarpActionPage(),
+                ),
+              );
+            },
+          ),
+        ),
+      );
+    }
   }
-}
 
+  
 class _NavigationPage extends StatelessWidget {
   const _NavigationPage({
     super.key,

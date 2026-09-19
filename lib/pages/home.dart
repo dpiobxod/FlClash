@@ -165,27 +165,27 @@ class _HomeShell extends ConsumerWidget {
                     label: item.label,
                   ),
               ],
-              selectedIndex: state.currentIndex,
-              onDestinationSelected: (index) =>
-                  _handleToPage(navigationItems[index].label, ref),
+                                selectedIndex: state.currentIndex,
+                  onDestinationSelected: (index) =>
+                      _handlePageNavigationItems(index.label, ref),
+                ),
+              ),
             ),
           ),
         ),
-      ),
-    ],
-  ),
         floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.orange[600],
-        child: const Icon(Icons.bolt, color: Colors.white),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const WarpActionPage(),
-            ),
-          );
-        },
-      ),
+          backgroundColor: Colors.orange[600],
+          child: const Icon(Icons.bolt, color: Colors.white),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const WarpActionPage(),
+              ),
+            );
+          },
+        ),
+
       bottomNavigationBar: AnimatedVisibility.bottomNavigation(
         visible: isMobile,
         child: MediaQuery.removePadding(

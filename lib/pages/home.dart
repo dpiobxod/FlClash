@@ -174,19 +174,19 @@ class _HomeShell extends ConsumerWidget {
       ),
     ],
   ),
-  floatingActionButton: FloatingActionButton(
-    backgroundColor: Colors.orange[800],
-    child: const Icon(Icons.bolt, color: Colors.white),
-    onPressed: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const WarpActionPage()),
-      );
-    },
-  ),
-);
-
-      AnimatedVisibility.bottomNavigation(
+        floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.orange[600],
+        child: const Icon(Icons.bolt, color: Colors.white),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const WarpActionPage(),
+            ),
+          );
+        },
+      ),
+      bottomNavigationBar: AnimatedVisibility.bottomNavigation(
         visible: isMobile,
         child: MediaQuery.removePadding(
           removeTop: true,
@@ -195,7 +195,7 @@ class _HomeShell extends ConsumerWidget {
           removeRight: true,
           context: context,
           child: NavigationBarTheme(
-            data: _NavigationBarDefaultsM3(context),
+            data: NavigationBarThemeDefaults.of(context),
             child: NavigationBar(
               destinations: [
                 for (final item in navigationItems)
@@ -206,58 +206,14 @@ class _HomeShell extends ConsumerWidget {
               ],
               selectedIndex: state.currentIndex,
               onDestinationSelected: (index) =>
-                  _handleToPage(navigationItems[index].label, ref),
+                  _handlePageNavigationItems(index.label, ref),
             ),
           ),
         ),
       ),
-    ],
-                ),
-            ),
-          ),
-          bottomNavigationBar: AnimatedVisibility.bottomNavigation(
-            visible: isMobile,
-            child: MediaQuery.removePadding(
-              removeTop: true,
-              removeBottom: false,
-              removeLeft: true,
-              removeRight: true,
-              context: context,
-              child: NavigationBarTheme(
-                data: NavigationBarThemeDefaults.of(context),
-                child: NavigationBar(
-                  destinations: [
-                    for (final item in navigationItems)
-                      NavigationDestination(
-                        icon: item.icon,
-                        label: item.label,
-                      ),
-                  ],
-                  selectedIndex: state.currentIndex,
-                  onDestinationSelected: (index) =>
-                      _handlePageNavigationItems(index.label, ref),
-                ),
-              ),
-            ),
-          ),
-          floatingActionButton: FloatingActionButton(
-            backgroundColor: Colors.orange[600],
-            child: const Icon(Icons.bolt, color: Colors.white),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const WarpActionPage(),
-                ),
-              );
-            },
-          ),
-        ),
-      );
-    }
+    );
   }
-
-  
+}
 class _NavigationPage extends StatelessWidget {
   const _NavigationPage({
     super.key,

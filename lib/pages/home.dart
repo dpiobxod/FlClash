@@ -1,3 +1,4 @@
+import 'warp_action_page.dart';
 import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/manager/app_manager.dart';
@@ -63,24 +64,168 @@ class _HomeShell extends ConsumerWidget {
     final state = ref.watch(navigationStateProvider);
     final isMobile = state.viewMode == ViewMode.mobile;
     final navigationItems = state.navigationItems;
-    return Material(
-      color: context.colorScheme.surface,
-      child: Column(
-        children: [
-          Flexible(
-            flex: 1,
-            child: FocusTraversalGroup(
-              policy: PageTraversalPolicy(),
-              child: MediaQuery.removePadding(
-                removeTop: false,
-                removeBottom: isMobile,
-                removeLeft: isMobile,
-                removeRight: isMobile,
-                context: context,
-                child: child,
-              ),
+    return Scaffold(
+  backgroundColor: context.colorScheme.surface,
+  body: Column(
+    children: [
+      Flexible(
+        flex: 1,
+        child: FocusTraversalGroup(
+          policy: PageTraversalPolicy(),
+          child: MediaQuery.removePadding(
+            removeTop: false,
+            removeBottom: isMobile,
+            removeLeft: isMobile,
+            removeRight: isMobile,
+            context: context,
+            child: child,
+          ),
+        ),
+      ),
+      AnimatedVisibility.bottomNavigation(
+        visible: isMobile,
+        child: MediaQuery.removePadding(
+          removeTop: true,
+          removeBottom: false,
+          removeLeft: true,
+          removeRight: true,
+          context: context,
+          child: NavigationBarTheme(
+            data: _NavigationBarDefaultsM3(context),
+            child: NavigationBar(
+              destinations: [
+                for (final item in navigationItems)
+                  NavigationDestination(
+                    icon: item.icon,
+                    label: item.label,
+                  ),
+              ],
+              selectedIndex: state.currentIndex,
+              onDestinationSelected: (index) =>
+                  _handleToPage(navigationItems[index].label, ref),
             ),
           ),
+        ),
+      ),
+    ],
+  ),
+  floatingActionButton: FloatingActionButton(
+    backgroundColor: Colors.orange[800],
+    child: const Icon(Icons.bolt, color: Colors.white),
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const WarpActionPage()),
+      );
+    },
+  ),
+);
+
+    AnimatedVisibility.bottomNavigation(
+      visible: isMobile,
+      child: MediaQuery.removePadding(
+        removeTop: true,
+        removeBottom: false,
+        removeLeft: true,
+        removeRight: true,
+        context: context,
+        child: NavigationBarTheme(
+          data: _NavigationBarDefaultsM3(context),
+          child: NavigationBar(
+            destinations: [
+              for (final item in navigationItems)
+                NavigationDestination(
+                  icon: item.icon,
+                  label: item.label,
+                ),
+            ],
+            selectedIndex: state.currentIndex,
+            onDestinationSelected: (index) =>
+                _handleToPage(navigationItems[index].label, ref),
+          ),
+        ),
+      ),
+    ),
+  ],
+),
+
+      AnimatedVisibility.bottomNavigation(
+        visible: isMobile,
+        child: MediaQuery.removePadding(
+          removeTop: true,
+          removeBottom: false,
+          removeLeft: true,
+          removeRight: true,
+          context: context,
+          child: NavigationBarTheme(
+            data: _NavigationBarDefaultsM3(context),
+            child: NavigationBar(
+              destinations: [
+                for (final item in navigationItems)
+                  NavigationDestination(
+                    icon: item.icon,
+                    label: item.label,
+                  ),
+              ],
+              selectedIndex: state.currentIndex,
+              onDestinationSelected: (index) =>
+                  _handleToPage(navigationItems[index].label, ref),
+            ),
+          ),
+        ),
+      ),
+    ],
+  ),
+  floatingActionButton: FloatingActionButton(
+    backgroundColor: Colors.orange[800],
+    child: const Icon(Icons.bolt, color: Colors.white),
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const WarpActionPage()),
+      );
+    },
+  ),
+);
+
+      AnimatedVisibility.bottomNavigation(
+        visible: isMobile,
+        child: MediaQuery.removePadding(
+          removeTop: true,
+          removeBottom: false,
+          removeLeft: true,
+          removeRight: true,
+          context: context,
+          child: NavigationBarTheme(
+            data: _NavigationBarDefaultsM3(context),
+            child: NavigationBar(
+              destinations: [
+                for (final item in navigationItems)
+                  NavigationDestination(
+                    icon: item.icon,
+                    label: item.label,
+                  ),
+              ],
+              selectedIndex: state.currentIndex,
+              onDestinationSelected: (index) =>
+                  _handleToPage(navigationItems[index].label, ref),
+            ),
+          ),
+        ),
+      ),
+    ],
+  ),
+  floatingActionButton: FloatingActionButton(
+    backgroundColor: Colors.orange[800],
+    child: const Icon(Icons.bolt, color: Colors.white),
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const WarpActionPage()),
+      );
+    },
+  ),
+);
           AnimatedVisibility.bottomNavigation(
             visible: isMobile,
             child: MediaQuery.removePadding(
